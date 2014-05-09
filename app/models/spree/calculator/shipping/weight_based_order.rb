@@ -11,8 +11,6 @@ module Spree
                                     :allow_destroy => true,
                                     :reject_if => proc { |attr| attr[:from_value].blank? && attr[:rate].blank? }
 
-      #before_save :set_is_weight_based_calculator
-
       # If weight is not defined for an item, use this instead
       preference :default_item_weight, :decimal, :default => 0
 
@@ -38,11 +36,6 @@ module Spree
         super
       end
 
-      ## Return calculator name
-      #def name
-      #  calculable.respond_to?(:name) ? calculable.name : calculable.to_s
-      #end
-
       def sorted_rates
         spree_weight_based_calculator_rates.order("from_value ASC")
       end
@@ -62,16 +55,6 @@ module Spree
       def get_rate(value)
         Spree::WeightBasedCalculatorRate.find_rate(self.id, value)
       end
-
-      ## Get the previous rate if rate for the specified value does not exist, return nil if no previous rate can be find
-      #def get_previous_rate(value, rate_type)
-      #  AdditionalCalculatorRate.find_previous_rate(self.id, rate_type, value)
-      #end
-
-      ## Before saving the record set that this is the weight based calculator
-      #def set_is_weight_based_calculator
-      #  self.is_weight_based_calculator = true
-      #end
     end
   end
 end
