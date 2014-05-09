@@ -14,7 +14,6 @@ end
 ENV['RAILS_ENV'] = 'test'
 
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
-
 require 'rspec/rails'
 require 'database_cleaner'
 require 'ffaker'
@@ -53,8 +52,8 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.color = true
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  ## Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  #config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # Capybara javascript drivers require transactional fixtures set to false, and we use DatabaseCleaner
   # to cleanup after each test instead.  Without transactional fixtures set to false the records created
