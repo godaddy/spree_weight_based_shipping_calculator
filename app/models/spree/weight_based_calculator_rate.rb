@@ -6,8 +6,10 @@ module Spree
     scope :for_value, -> (value) { where("from_value <= ?", value) }
 
     validates :calculator_id, :from_value, :rate, :presence => true
-    validates :from_value, :rate, :numericality => true, :allow_blank => false
+    validates :from_value, :rate, :numericality => { greater_than_or_equal_to: 0 }, :allow_blank => false
     validates_uniqueness_of :from_value, :scope => :calculator_id
+
+    attr_accessible :from_value, :rate
 
     # Find the rate for the specified value
     def self.find_rate(calculator_id, value)

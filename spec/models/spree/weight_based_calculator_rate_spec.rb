@@ -44,6 +44,12 @@ describe Spree::WeightBasedCalculatorRate do
         rate1.errors_on(:from_value).should_not be_blank
       end
 
+      it "should be greater than zero" do
+        rate1.from_value = -10
+        rate1.should_not be_valid
+        rate1.errors_on(:from_value).should_not be_blank
+      end
+
       it "should be unique" do
         rate1.save!
 
@@ -65,6 +71,13 @@ describe Spree::WeightBasedCalculatorRate do
         rate1.should_not be_valid
         rate1.errors_on(:rate).should_not be_blank
       end
+
+      it "should be greater than zero" do
+        rate1.rate = -10
+        rate1.should_not be_valid
+        rate1.errors_on(:rate).should_not be_blank
+      end
+
     end
 
     context "find_rate" do

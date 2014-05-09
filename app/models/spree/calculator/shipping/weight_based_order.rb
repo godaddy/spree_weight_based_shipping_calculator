@@ -14,6 +14,8 @@ module Spree
       # If weight is not defined for an item, use this instead
       preference :default_item_weight, :decimal, :default => 0
 
+      attr_accessible :rates_attributes
+
       def self.description
         Spree.t(:weight_based_shipping_rate_per_order)
       end
