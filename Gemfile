@@ -4,3 +4,9 @@ source 'https://rubygems.org'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-0-stable'
 
 gemspec
+
+
+group :development, :test do
+  gem 'rails', '~> 3.2.14'
+  gem 'factory_girl_rails', '~> 4.0'
+end
