@@ -43,6 +43,14 @@ describe Spree::WeightBasedCalculatorRate do
         rate1.should_not be_valid
         rate1.errors_on(:from_value).should_not be_blank
       end
+
+      it "should be unique" do
+        rate1.save!
+
+        rate2.from_value = 0
+        rate2.should_not be_valid
+        rate2.errors_on(:from_value).should_not be_blank
+      end
     end
 
     context "rate" do
