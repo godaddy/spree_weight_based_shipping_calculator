@@ -4,6 +4,7 @@ module Spree
   module Calculator::Shipping
     class WeightBasedOrder < ShippingCalculator
       has_many :rates, :class_name => 'Spree::WeightBasedCalculatorRate',
+               :order => "from_value ASC",
                :foreign_key => :calculator_id,
                :dependent => :destroy
 
