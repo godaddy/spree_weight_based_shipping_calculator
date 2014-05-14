@@ -8,15 +8,12 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
   let(:calculator) { FactoryGirl.build(:weight_based_shipping_calculator) }
 
   let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  #:calculator_id => @calculator.id,
                                   :from_value => 0,
                                   :rate => 10) }
   let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  #:calculator_id => @calculator.id,
                                   :from_value => 8,
                                   :rate => 15) }
   let(:rate3) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  #:calculator_id => @calculator.id,
                                   :from_value => 20,
                                   :rate => 25) }
 
@@ -93,8 +90,16 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
   end
 
   context "with validation errors" do
+    it "has no rate configured" do
+      expect(calculator).to_not be_valid
+    end
 
-
+    it "has duplicate weight configured" do
+      calculator.rates << rate1
+      rate2.from_value = 0
+      calculator.rates << rate2
+      expect(calculator).to_not be_valid
+    end
   end
 
 end
