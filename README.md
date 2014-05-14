@@ -9,12 +9,14 @@ shipping cost. The shipping cost of an order is determined by comparing the list
 weight - First, find the lowest shipping weight in the list that is greater than the order weight, its corresponding shipping
 cost is the shipping cost of the order. For example, here is the list of weights and its shipping cost configuration:
 
+```
 Weight(lb)      Shipping Cost
    0.0              $5.0
    5.0              $10.0
    20.0             $15.0
-
+```
 and here is the shipping cost for the following orders:
+```
 Order weight        Shipping Cost
     3.0lb               $5.0
     5.0lb               $5.0
@@ -23,7 +25,7 @@ Order weight        Shipping Cost
     29lb                $15.0
     50lb                $15.0
     90lb                $15.0
-
+```
 Note: Currently, UI for Admin is not provided in this gem.
 
 Installation
