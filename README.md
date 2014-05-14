@@ -15,7 +15,6 @@ Weight(lb)      Shipping Cost
    5.0              $10.0
    20.0             $15.0
 ```
-
 and here is the shipping cost for the following orders:
 ```
 Order weight        Shipping Cost
