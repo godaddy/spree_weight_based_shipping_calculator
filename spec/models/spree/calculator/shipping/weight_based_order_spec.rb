@@ -3,22 +3,20 @@ require 'spec_helper'
 describe Spree::Calculator::Shipping::WeightBasedOrder do
   before(:all) do
     @shipping_method = FactoryGirl.create(:shipping_method)
-    @calculator = FactoryGirl.create(:weight_based_shipping_calculator)
   end
 
+  let(:calculator) { FactoryGirl.build(:weight_based_shipping_calculator) }
+
   let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :calculator_id => @calculator.id,
-                                  #:calculator_type => @calculator.class.to_s,
+                                  #:calculator_id => @calculator.id,
                                   :from_value => 0,
                                   :rate => 10) }
   let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :calculator_id => @calculator.id,
-                                  #:calculator_type => @calculator.class.to_s,
+                                  #:calculator_id => @calculator.id,
                                   :from_value => 8,
                                   :rate => 15) }
   let(:rate3) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :calculator_id => @calculator.id,
-                                  #:calculator_type => @calculator.class.to_s,
+                                  #:calculator_id => @calculator.id,
                                   :from_value => 20,
                                   :rate => 25) }
 
@@ -42,57 +40,61 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
                                        contents: [Spree::Stock::Package::ContentItem.new(variant1, 2),
                                                   Spree::Stock::Package::ContentItem.new(variant2, 3)]) }
 
-  #let(:empty_order) { FactoryGirl.create(:order) }
-  #let(:order_with_one_item) { FactoryGirl.create(:order_with_one_item) }
-
   context "there are no items in the package" do
 
     before(:each) do
-      empty_package.contents.length.should == 0
+      calculator.rates << rate1
+      calculator.save!
+      expect(empty_package.contents.length).to eq(0)
     end
 
     it "returns zero" do
-      rate = @calculator.compute_package(empty_package)
-      rate.should == 0
+      rate = calculator.compute_package(empty_package)
+      expect(rate).to eq(0)
     end
 
     it "is not available" do
-      @calculator.available?(empty_package).should be_false
+      expect(calculator.available?(empty_package)).to be_false
     end
   end
 
-  context "There are one items in the package" do
+  context "There are more than one items in the package" do
     before(:each) do
-      rate1.save!
-      rate2.save!
-      rate3.save!
+      calculator.rates << rate1
+      calculator.rates << rate2
+      calculator.rates << rate3
+      calculator.save!
     end
 
     it "calculates correct rate for one item with zero weight" do
       package_with_one_item.contents[0].variant.stub(weight: 0)
 
-      rate = @calculator.compute_package(package_with_one_item)
-      rate.should == 10
+      rate = calculator.compute_package(package_with_one_item)
+      expect(rate).to eq(10)
     end
 
     it "calculates correct rate for one item with total weight 6" do
-      rate = @calculator.compute_package(package_with_one_item)
-      rate.should == 10
+      rate = calculator.compute_package(package_with_one_item)
+      expect(rate).to eq(10)
     end
 
     it "calculates correct rate for two items with total weight 18" do
-      rate = @calculator.compute_package(package_with_two_item)
-      rate.should == 15
+      rate = calculator.compute_package(package_with_two_item)
+      expect(rate).to eq(15)
     end
 
     it "calculates correct rate for two items with total weight 18" do
       package_with_two_item.contents[0].variant.stub(weight: 10)
 
-      rate = @calculator.compute_package(package_with_one_item)
-      rate.should == 25
+      rate = calculator.compute_package(package_with_one_item)
+      expect(rate).to eq(25)
     end
 
   end
 
+  context "with validation errors" do
+
+
+  end
 
 end
