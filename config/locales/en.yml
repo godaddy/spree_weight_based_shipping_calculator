@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+
+  spree:
+    errors:
+      must_have_at_least_one_shipping_rate: "Must have at least one shipping rate"
+      weight_based_shipping_must_be_unique: "Shipping weight must be unique"
+

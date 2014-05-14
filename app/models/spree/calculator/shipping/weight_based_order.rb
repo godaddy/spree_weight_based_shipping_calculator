@@ -25,6 +25,8 @@ module Spree
       def compute_package(package)
         content_items = package.contents
 
+        return 0 if package.contents.empty?
+
         total_weight = total_weight(content_items)
         cost = get_rate(total_weight)
 
@@ -35,7 +37,6 @@ module Spree
         package.contents.any? && Spree::WeightBasedCalculatorRate.for_calculator(self.id).count > 0
       end
 
-      ## TODO: Check if this is needed.
       def self.register
         super
       end
@@ -61,12 +62,12 @@ module Spree
       end
 
       def validate_at_least_one_rate
-        errors.add(:rates, "must have at least one") unless rates.length > 0
+        errors.add(:rates,  Spree.t('errors.must_have_at_least_one_shipping_rate')) unless rates.length > 0
       end
 
       def validate_rates_uniqueness
         new_or_existing_rates = rates.reject { |r| r.marked_for_destruction? }
-        errors.add(:rates, "must be unique")  if new_or_existing_rates.map(&:from_value).uniq.length < new_or_existing_rates.length
+        errors.add(:rates, Spree.t('errors.weight_based_shipping_must_be_unique'))  if new_or_existing_rates.map(&:from_value).uniq.length < new_or_existing_rates.length
       end
     end
   end
