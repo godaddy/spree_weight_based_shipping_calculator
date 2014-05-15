@@ -41,6 +41,8 @@ Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
+rake spree_weight_based_shipping_calculator:install:migrations
+rake db:migrate
 ```
 
 Testing
