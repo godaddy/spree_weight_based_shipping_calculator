@@ -17,14 +17,17 @@ Weight(lb)      Shipping Cost
 ```
 and here is the shipping cost for the following orders:
 ```
-Order weight        Shipping Cost
-    3.0lb               $5.0
-    5.0lb               $5.0
-    5.1lb               $10.0
-    9.2lb               $10.0
-    29lb                $15.0
-    50lb                $15.0
-    90lb                $15.0
+Order weight(lb)        Shipping Cost
+    3.0                     $5.0
+    4.99                    $5.0
+    5.0                     $10.0
+    5.1                     $10.0
+    9.2                     $10.0
+    19.99                   $10.0
+    20                      $15.0
+    29                      $15.0
+    50                      $15.0
+    90                      $15.0
 ```
 Note: Currently, UI for Admin is not provided in this gem.
 
