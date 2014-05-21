@@ -5,7 +5,7 @@ class CreateSpreeWeightBasedCalculatorRates < ActiveRecord::Migration
       t.decimal :from_value,        :null => false, :precision => 8, :scale => 3, :default => 0.0
       t.decimal :rate,              :null => false, :precision => 8, :scale => 2, :default => 0.0
 
-      t.timestamps
+      t.timestamps :null => false
     end
 
     add_index(:spree_weight_based_calculator_rates, :calculator_id)
