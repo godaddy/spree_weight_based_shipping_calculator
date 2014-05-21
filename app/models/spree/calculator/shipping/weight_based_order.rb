@@ -3,8 +3,9 @@ require_dependency 'spree/shipping_calculator'
 module Spree
   module Calculator::Shipping
     class WeightBasedOrder < ShippingCalculator
-      has_many :rates, :class_name => 'Spree::WeightBasedCalculatorRate',
-               :order => "from_value ASC",
+      has_many :rates,
+               -> { order("from_value ASC") },
+               :class_name => 'Spree::WeightBasedCalculatorRate',
                :foreign_key => :calculator_id,
                :dependent => :destroy
 
