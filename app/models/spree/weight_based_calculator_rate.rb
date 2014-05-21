@@ -8,8 +8,6 @@ module Spree
     validates :from_value, :rate, :presence => true
     validates :from_value, :rate, :numericality => { greater_than_or_equal_to: 0 }, :allow_blank => false
 
-    attr_accessible :from_value, :rate
-
     # Find the rate for the specified value
     def self.find_rate(calculator_id, value)
       range = for_calculator(calculator_id).for_value(value).order("from_value DESC").first

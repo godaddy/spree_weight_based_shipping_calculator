@@ -14,8 +14,6 @@ module Spree
       # If weight is not defined for an item, use this instead
       preference :default_item_weight, :decimal, :default => 0
 
-      attr_accessible :rates_attributes
-
       validate :validate_at_least_one_rate, :validate_rates_uniqueness
 
       def self.description
