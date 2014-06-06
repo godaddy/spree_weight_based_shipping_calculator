@@ -32,10 +32,10 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
 
   let(:empty_package) { double(Spree::Stock::Package, order: mock_model(Spree::Order), contents: []) }
   let(:package_with_one_item) { double(Spree::Stock::Package, order: mock_model(Spree::Order),
-                                       contents: [Spree::Stock::Package::ContentItem.new(variant1, 2)]) }
+                                       contents: [Spree::Stock::Package::ContentItem.new(nil, variant1, 2)]) }
   let(:package_with_two_item) { double(Spree::Stock::Package, order: mock_model(Spree::Order),
-                                       contents: [Spree::Stock::Package::ContentItem.new(variant1, 2),
-                                                  Spree::Stock::Package::ContentItem.new(variant2, 3)]) }
+                                       contents: [Spree::Stock::Package::ContentItem.new(nil, variant1, 2),
+                                                  Spree::Stock::Package::ContentItem.new(nil, variant2, 3)]) }
 
   context "there are no items in the package" do
 
