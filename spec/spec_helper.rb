@@ -1,13 +1,14 @@
-# Run Coverage report
-require 'simplecov'
-SimpleCov.start do
-  add_filter 'spec/dummy'
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Mailers', 'app/mailers'
-  add_group 'Models', 'app/models'
-  add_group 'Views', 'app/views'
-  add_group 'Libraries', 'lib'
+if ENV["COVERAGE"]
+  require_relative 'rcov_exclude_list.rb'
+  exlist = Dir.glob(@exclude_list)
+  require 'simplecov'
+  require 'simplecov-rcov'
+  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+  SimpleCov.start do
+    exlist.each do |p|
+      add_filter p
+    end
+  end
 end
 
 # Configure Rails Environment
@@ -78,4 +79,9 @@ RSpec.configure do |config|
   end
 
   config.fail_fast = ENV['FAIL_FAST'] || false
+end
+
+if ENV["COVERAGE"]
+  # Load all files except the ones in exclude list
+  require_all(Dir.glob('**/*.rb') - exlist)
 end
