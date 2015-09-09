@@ -8,3 +8,4 @@ es:
     errors:
       must_have_at_least_one_shipping_rate: "Debe tener cuando menos un precio de envío"
       weight_based_shipping_must_be_unique: "El peso del envío debe ser único"
+
