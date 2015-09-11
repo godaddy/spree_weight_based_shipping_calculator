@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ps:
+  hello: "[Héllò wòrld !!!]"
+
+  spree:
+    errors:
+      must_have_at_least_one_shipping_rate: "[Müst håvé åt léåst òné shîppîng råté !!! !!! !!!]"
+      weight_based_shipping_must_be_unique: "[Shîppîng wéîght müst bé ünîqüé !!! !!! !!!]"
+
