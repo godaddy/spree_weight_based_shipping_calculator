@@ -2,10 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 pz:
-  hello: "Zzzzz zzzzz"
+  hello: "⌠515255⌡Zzzzz zzzzz⌠515255⌡"
 
   spree:
     errors:
-      must_have_at_least_one_shipping_rate: "Zzzz zzzz zz zzzzz zzz zzzzzzzz zzzz"
-      weight_based_shipping_must_be_unique: "Zzzzzzzz zzzzzz zzzz zz zzzzzz"
+      must_have_at_least_one_shipping_rate: "⌠515256⌡Zzzz zzzz zz zzzzz zzz zzzzzzzz zzzz⌠515256⌡"
+      weight_based_shipping_must_be_unique: "⌠515257⌡Zzzzzzzz zzzzzz zzzz zz zzzzzz⌠515257⌡"
 
