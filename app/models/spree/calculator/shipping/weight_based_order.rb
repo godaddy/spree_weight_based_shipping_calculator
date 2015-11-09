@@ -33,7 +33,7 @@ module Spree
       end
 
       def available?(package)
-        package.contents.any? && Spree::WeightBasedCalculatorRate.for_calculator(self.id).count > 0
+        package.contents.any? && Spree::WeightBasedCalculatorRate.for_calculator(id).size > 0
       end
 
       def self.register
@@ -57,16 +57,16 @@ module Spree
 
       # Get the rate from the database or nil if could not find the rate
       def get_rate(value)
-        Spree::WeightBasedCalculatorRate.find_rate(self.id, value)
+        Spree::WeightBasedCalculatorRate.find_rate(id, value)
       end
 
       def validate_at_least_one_rate
-        errors.add(:rates,  Spree.t('errors.must_have_at_least_one_shipping_rate')) unless rates.length > 0
+        errors.add(:rates,  Spree.t('errors.must_have_at_least_one_shipping_rate')) unless rates.size > 0
       end
 
       def validate_rates_uniqueness
         new_or_existing_rates = rates.reject { |r| r.marked_for_destruction? }
-        errors.add(:rates, Spree.t('errors.weight_based_shipping_must_be_unique'))  if new_or_existing_rates.map(&:from_value).uniq.length < new_or_existing_rates.length
+        errors.add(:rates, Spree.t('errors.weight_based_shipping_must_be_unique'))  if new_or_existing_rates.map(&:from_value).uniq.size < new_or_existing_rates.size
       end
     end
   end
