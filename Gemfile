@@ -11,4 +11,5 @@ group :development, :test do
   gem 'yarjuf'
   gem 'require_all'
   gem 'byebug'
+  gem 'shoulda-matchers'
 end

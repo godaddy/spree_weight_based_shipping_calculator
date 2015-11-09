@@ -42,6 +42,15 @@ RSpec.configure do |config|
   config.fail_fast = ENV['FAIL_FAST'] || false
 end
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+
+
 if ENV["COVERAGE"]
   # Load all files except the ones in exclude list
   require_all(Dir.glob('**/*.rb') - exlist)
