@@ -5,15 +5,15 @@ module Spree
     class WeightBasedOrder < ShippingCalculator
       has_many :rates,
                -> { order("from_value ASC") },
-               :class_name => 'Spree::WeightBasedCalculatorRate',
-               :foreign_key => :calculator_id,
-               :dependent => :destroy
+               class_name: 'Spree::WeightBasedCalculatorRate',
+               foreign_key: :calculator_id,
+               dependent: :destroy
 
       accepts_nested_attributes_for :rates,
-                                    :allow_destroy => true
+                                    allow_destroy: true
 
       # If weight is not defined for an item, use this instead
-      preference :default_item_weight, :decimal, :default => 0
+      preference :default_item_weight, :decimal, default: 0
 
       validate :validate_at_least_one_rate, :validate_rates_uniqueness
 

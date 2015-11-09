@@ -8,13 +8,13 @@ describe Spree::WeightBasedCalculatorRate do
   let(:calculator) { OpenStruct.new(id: 1) }
 
   let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :calculator_id => calculator.id,
-                                  :from_value => 0,
-                                  :rate => 10) }
+                                  calculator_id: calculator.id,
+                                  from_value: 0,
+                                  rate: 10) }
   let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :calculator_id => calculator.id,
-                                  :from_value => 8,
-                                  :rate => 15) }
+                                  calculator_id: calculator.id,
+                                  from_value: 8,
+                                  rate: 15) }
 
   context "without validation errors" do
     it "should not have validation errors with valid attributes" do
@@ -28,25 +28,25 @@ describe Spree::WeightBasedCalculatorRate do
       it "should be entered" do
         rate1.from_value = nil
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:from_value)
+        expect(rate1.errors[:from_value].size).to be >= 1
       end
 
       it "should not be blank" do
         rate1.from_value = ''
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:from_value)
+        expect(rate1.errors[:from_value].size).to be >= 1
       end
 
       it "should be numeric" do
         rate1.from_value = 'foo'
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:from_value)
+        expect(rate1.errors[:from_value].size).to be >= 1
       end
 
       it "should be greater than zero" do
         rate1.from_value = -10
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:from_value)
+        expect(rate1.errors[:from_value].size).to be >= 1
       end
 
     end
@@ -55,33 +55,33 @@ describe Spree::WeightBasedCalculatorRate do
       it "should be entered" do
         rate1.rate = nil
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:rate)
+        expect(rate1.errors[:rate].size).to be >= 1
       end
 
       it "should be numeric" do
         rate1.rate = 'foo'
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:rate)
+        expect(rate1.errors[:rate].size).to be >= 1
       end
 
       it "should be greater than zero" do
         rate1.rate = -10
         expect(rate1).to_not be_valid
-        expect(rate1).to have_at_least(1).errors_on(:rate)
+        expect(rate1.errors[:rate].size).to be >= 1
       end
 
     end
 
     context "find_rate" do
       it "should find nothing when there are no rates" do
-        Spree::WeightBasedCalculatorRate.all.should have(0).records
+        expect(Spree::WeightBasedCalculatorRate.count).to eq(0)
         expect(Spree::WeightBasedCalculatorRate.find_rate(calculator.id, 10)).to be_nil
       end
 
       it "should find a valid rate (from a single entry)" do
         rate1.save!
 
-        expect(Spree::WeightBasedCalculatorRate.all).to have(1).records
+        expect(Spree::WeightBasedCalculatorRate.count).to eq(1)
         expect(Spree::WeightBasedCalculatorRate.find_rate(calculator.id, 0)).to eq(10)
         expect(Spree::WeightBasedCalculatorRate.find_rate(calculator.id, 0.1)).to eq(10)
         expect(Spree::WeightBasedCalculatorRate.find_rate(calculator.id, 1)).to eq(10)
