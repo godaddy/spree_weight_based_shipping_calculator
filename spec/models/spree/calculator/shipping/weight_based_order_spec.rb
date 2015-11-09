@@ -39,6 +39,9 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
                                        contents: [Spree::Stock::Package::ContentItem.new(nil, variant1, 2),
                                                   Spree::Stock::Package::ContentItem.new(nil, variant2, 3)]) }
 
+  it { should have_many(:rates)}
+
+
   context "there are no items in the package" do
     before(:each) do
       calculator.rates << rate1
