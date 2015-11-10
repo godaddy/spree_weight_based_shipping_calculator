@@ -5,15 +5,15 @@ module Spree
     class WeightBasedOrder < ShippingCalculator
       has_many :rates,
                -> { order("from_value ASC") },
-               :class_name => 'Spree::WeightBasedCalculatorRate',
-               :foreign_key => :calculator_id,
-               :dependent => :destroy
+               class_name: 'Spree::WeightBasedCalculatorRate',
+               foreign_key: :calculator_id,
+               dependent: :destroy
 
       accepts_nested_attributes_for :rates,
-                                    :allow_destroy => true
+                                    allow_destroy: true
 
       # If weight is not defined for an item, use this instead
-      preference :default_item_weight, :decimal, :default => 0
+      preference :default_item_weight, :decimal, default: 0
 
       validate :validate_at_least_one_rate, :validate_rates_uniqueness
 
@@ -33,7 +33,7 @@ module Spree
       end
 
       def available?(package)
-        package.contents.any? && Spree::WeightBasedCalculatorRate.for_calculator(self.id).count > 0
+        package.contents.any? && Spree::WeightBasedCalculatorRate.for_calculator(id).size > 0
       end
 
       def self.register
@@ -57,16 +57,16 @@ module Spree
 
       # Get the rate from the database or nil if could not find the rate
       def get_rate(value)
-        Spree::WeightBasedCalculatorRate.find_rate(self.id, value)
+        Spree::WeightBasedCalculatorRate.find_rate(id, value)
       end
 
       def validate_at_least_one_rate
-        errors.add(:rates,  Spree.t('errors.must_have_at_least_one_shipping_rate')) unless rates.length > 0
+        errors.add(:rates,  Spree.t('errors.must_have_at_least_one_shipping_rate')) unless rates.size > 0
       end
 
       def validate_rates_uniqueness
         new_or_existing_rates = rates.reject { |r| r.marked_for_destruction? }
-        errors.add(:rates, Spree.t('errors.weight_based_shipping_must_be_unique'))  if new_or_existing_rates.map(&:from_value).uniq.length < new_or_existing_rates.length
+        errors.add(:rates, Spree.t('errors.weight_based_shipping_must_be_unique'))  if new_or_existing_rates.map(&:from_value).uniq.size < new_or_existing_rates.size
       end
     end
   end
