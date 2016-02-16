@@ -8,27 +8,29 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
   let(:calculator) { FactoryGirl.build(:weight_based_shipping_calculator) }
 
   let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :from_value => 0,
-                                  :rate => 10) }
+                                  from_value: 0,
+                                  rate: 10) }
   let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :from_value => 8,
-                                  :rate => 15) }
+                                  from_value: 8,
+                                  rate: 15) }
   let(:rate3) { FactoryGirl.build(:weight_based_calculator_rate,
-                                  :from_value => 20,
-                                  :rate => 25) }
+                                  from_value: 20,
+                                  rate: 25) }
 
   let(:variant1) { double(Spree::Variant,
                           weight: 3,
-                          width: 1,
-                          depth: 1,
+                          width:  1,
+                          depth:  1,
                           height: 1,
-                          price: 2) }
+                          price:  2)
+                  }
   let(:variant2) { double(Spree::Variant,
                           weight: 4,
-                          width: 1,
-                          depth: 1,
+                          width:  1,
+                          depth:  1,
                           height: 1,
-                          price: 5) }
+                          price:  5)
+                  }
 
   let(:empty_package) { double(Spree::Stock::Package, order: mock_model(Spree::Order), contents: []) }
   let(:package_with_one_item) { double(Spree::Stock::Package, order: mock_model(Spree::Order),
@@ -37,8 +39,10 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
                                        contents: [Spree::Stock::Package::ContentItem.new(nil, variant1, 2),
                                                   Spree::Stock::Package::ContentItem.new(nil, variant2, 3)]) }
 
-  context "there are no items in the package" do
+  it { should have_many(:rates)}
 
+
+  context "there are no items in the package" do
     before(:each) do
       calculator.rates << rate1
       calculator.save!
@@ -51,7 +55,7 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
     end
 
     it "is not available" do
-      expect(calculator.available?(empty_package)).to be_false
+      expect(calculator.available?(empty_package)).to be false
     end
   end
 
@@ -64,7 +68,7 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
     end
 
     it "calculates correct rate for one item with zero weight" do
-      package_with_one_item.contents[0].variant.stub(weight: 0)
+      allow(package_with_one_item.contents[0].variant).to receive(:weight).and_return(0)
 
       rate = calculator.compute_package(package_with_one_item)
       expect(rate).to eq(10)
@@ -81,7 +85,7 @@ describe Spree::Calculator::Shipping::WeightBasedOrder do
     end
 
     it "calculates correct rate for two items with total weight 18" do
-      package_with_two_item.contents[0].variant.stub(weight: 10)
+      allow(package_with_two_item.contents[0].variant).to receive(:weight).and_return(10)
 
       rate = calculator.compute_package(package_with_one_item)
       expect(rate).to eq(25)

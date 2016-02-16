@@ -2,10 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ps:
-  hello: "[Héllò wòrld !!!]"
+  hello: "⌠515255⌡[Héllò wòrld !!!]⌠515255⌡"
 
   spree:
     errors:
-      must_have_at_least_one_shipping_rate: "[Müst håvé åt léåst òné shîppîng råté !!! !!! !!!]"
-      weight_based_shipping_must_be_unique: "[Shîppîng wéîght müst bé ünîqüé !!! !!! !!!]"
+      must_have_at_least_one_shipping_rate: "⌠515256⌡[Müst håvé åt léåst òné shîppîng råté !!! !!! !!!]⌠515256⌡"
+      weight_based_shipping_must_be_unique: "⌠515257⌡[Shîppîng wéîght müst bé ünîqüé !!! !!! !!!]⌠515257⌡"
 

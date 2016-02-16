@@ -7,10 +7,9 @@ gemspec
 
 group :development, :test do
   gem 'rails', '~> 4.0.5'
-  gem 'factory_girl_rails', '~> 4.0'
   gem 'simplecov-rcov'
   gem 'yarjuf'
   gem 'require_all'
-  gem 'test-unit'
   gem 'byebug'
+  gem 'shoulda-matchers'
 end
