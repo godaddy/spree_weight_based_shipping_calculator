@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :weight_based_shipping_calculator, class: Spree::Calculator::Shipping::WeightBasedOrder do
     calculable { Spree::ShippingMethod.first }
   end
