@@ -2,18 +2,18 @@ require 'spec_helper'
 
 describe Spree::Calculator::Shipping::WeightBasedOrder do
   before(:all) do
-    @shipping_method = FactoryGirl.create(:shipping_method)
+    @shipping_method = FactoryBot.create(:shipping_method)
   end
 
-  let(:calculator) { FactoryGirl.build(:weight_based_shipping_calculator) }
+  let(:calculator) { FactoryBot.build(:weight_based_shipping_calculator) }
 
-  let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
+  let(:rate1) { FactoryBot.build(:weight_based_calculator_rate,
                                   from_value: 0,
                                   rate: 10) }
-  let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
+  let(:rate2) { FactoryBot.build(:weight_based_calculator_rate,
                                   from_value: 8,
                                   rate: 15) }
-  let(:rate3) { FactoryGirl.build(:weight_based_calculator_rate,
+  let(:rate3) { FactoryBot.build(:weight_based_calculator_rate,
                                   from_value: 20,
                                   rate: 25) }
 

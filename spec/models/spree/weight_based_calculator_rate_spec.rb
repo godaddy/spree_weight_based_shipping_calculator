@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe Spree::WeightBasedCalculatorRate do
   before(:all) do
-    @shipping_method = FactoryGirl.create(:shipping_method)
+    @shipping_method = FactoryBot.create(:shipping_method)
   end
 
   let(:calculator) { OpenStruct.new(id: 1) }
 
-  let(:rate1) { FactoryGirl.build(:weight_based_calculator_rate,
+  let(:rate1) { FactoryBot.build(:weight_based_calculator_rate,
                                   calculator_id: calculator.id,
                                   from_value: 0,
                                   rate: 10) }
-  let(:rate2) { FactoryGirl.build(:weight_based_calculator_rate,
+  let(:rate2) { FactoryBot.build(:weight_based_calculator_rate,
                                   calculator_id: calculator.id,
                                   from_value: 8,
                                   rate: 15) }
