@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class WeightBasedCalculatorRate < ActiveRecord::Base
     belongs_to :calculator, class_name: 'Spree::Calculator::Shipping::WeightBasedOrder'

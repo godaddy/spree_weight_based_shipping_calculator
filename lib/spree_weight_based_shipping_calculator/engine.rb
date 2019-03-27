@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpreeWeightBasedShippingCalculator
   class Engine < Rails::Engine
     require 'spree/core'
