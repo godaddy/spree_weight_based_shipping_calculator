@@ -1,7 +1,0 @@
----
-qa:
-  hello: "[spree_weight_based_shipping_calculator/master/config/locales/en.yml:qa:hello]"
-  spree:
-    errors:
-      must_have_at_least_one_shipping_rate: "[spree_weight_based_shipping_calculator/master/config/locales/en.yml:qa:spree:errors:must_have_at_least_one_shipping_rate]"
-      weight_based_shipping_must_be_unique: "[spree_weight_based_shipping_calculator/master/config/locales/en.yml:qa:spree:errors:weight_based_shipping_must_be_unique]"
