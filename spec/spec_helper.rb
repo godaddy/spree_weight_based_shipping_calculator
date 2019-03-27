@@ -15,29 +15,28 @@ end
 ENV['RAILS_ENV'] = 'test'
 
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
+
 require 'rspec/rails'
 require 'ffaker'
 
 # Requires factories defined in spree_core
 require 'spree/testing_support/factories'
 require 'rspec/active_model/mocks'
+require 'shoulda-matchers'
 
 # Requires factories defined in lib/spree_weight_based_shipping_calculator/factories.rb
 require 'spree_weight_based_shipping_calculator/factories'
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
-  config.use_transactional_fixtures = true
+  config.filter_run_when_matching :focus
+  config.disable_monkey_patching!
 
-  # == Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
   config.mock_with :rspec
-  config.color = true
+  config.use_transactional_fixtures = true
 
   config.fail_fast = ENV['FAIL_FAST'] || false
 end
@@ -48,8 +47,6 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
-
-
 
 if ENV["COVERAGE"]
   # Load all files except the ones in exclude list

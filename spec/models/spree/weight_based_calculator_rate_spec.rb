@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Spree::WeightBasedCalculatorRate do
+RSpec.describe Spree::WeightBasedCalculatorRate do
   before(:all) do
     @shipping_method = FactoryBot.create(:shipping_method)
   end
