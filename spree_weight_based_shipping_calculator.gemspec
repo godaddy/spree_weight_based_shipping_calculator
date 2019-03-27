@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '3.0.0'
   s.summary     = 'Weight based shipping calculator'
   s.description = 'Calculate shipping cost based on total item weight in an order.'
-  s.required_ruby_version = '>= 2.1.1'
+  s.required_ruby_version = '>= 2.4.0'
 
   s.author    = 'Alan Lo'
   s.email     = 'alanlo@godaddy.com'
@@ -21,7 +21,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rspec-activemodel-mocks'
   s.add_development_dependency 'factory_bot_rails'
+  s.add_development_dependency 'simplecov-rcov'
+  s.add_development_dependency 'yarjuf'
+  s.add_development_dependency 'require_all'
   s.add_development_dependency 'shoulda-matchers'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.1'
 end
