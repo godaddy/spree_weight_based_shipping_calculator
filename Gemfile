@@ -6,7 +6,7 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
 gemspec
 
 group :development, :test do
-  gem 'rails', '~> 4.2.0'
+  gem 'rails', '~> 7.0.0'
   gem 'simplecov-rcov'
   gem 'yarjuf'
   gem 'require_all'
